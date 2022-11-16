@@ -1,1 +1,107 @@
+<html>
+  <head>
+    <title>Employee Details</title>
+  </head>
+  <body>
+    <h1 class="title">{{title}}</h1>
+    <div class="container">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
 
+          <div class="name">
+          <label>FirstName</label>
+          <input type="text" formControlName="firstname" [(ngModel)]="name" class="form-control" [ngClass]="{'is-invalid':submitted && n['firstname'].errors}" id="name" name="name">
+          <div *ngIf="submitted && n['firstname'].errors" class="invalid-feedback">
+            <div *ngIf="n['firstname'].errors['required']">
+              Name is required
+            </div>
+            </div>
+          </div>
+          {{name}}
+        </div>
+       
+        <div class="form-group">
+
+          <div class="address">
+          <label>Address</label>
+          <textarea formControlName="address" class="form-control" [ngClass]="{'is-invalid':submitted && n['address'].errors}"></textarea>
+       <div *ngIf="submitted  && n['address'].errors" class="invalid-feedback">
+        <div *ngIf="n['address'].errors['required']">
+          Address is required
+        </div>
+        </div>
+       </div>
+        </div>
+
+        <div class="form-group">
+          <div class="date">
+          <label>DOB</label>
+          <input type="date" formControlName="date" class="form-control" id="date" [ngClass]="{'is-invalid':submitted && n['date'].errors}">
+          <div *ngIf="submitted && n['date'].errors" class="invalid-feedback">
+            <div *ngIf="n['date'].errors['required']">
+              Date of Birth is required
+            </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="role">
+          <label>Role</label>
+          <select formControlName="role" class="form-control" [ngClass]="{'is-invalid':submitted} && n['role'].errors">
+            <option value="admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+            <option value="Developer">Developer</option>
+          </select>
+
+            <div *ngIf="submitted && n['role'].errors" class="invalid-feedback">
+              <div *ngIf="n['role'].errors['required']">
+                Role is required
+              </div>
+              </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="phone">
+          <label>Phone</label>
+          <input formControlName="phone" class="form-control" [ngClass]="{'is-invalid':submitted} && n['phone'].errors">
+
+          <div *ngIf="submitted && n['phone'].errors" class="invalid-feedback">
+            <div *ngIf="n['phone'].errors['required']">
+              Phone number is required
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="gender">
+          <label>Gender</label>
+          <input type="radio" formControlName="radio" class="form-control" [ngClass]="{'is-invalid':submitted} && n['radio'].errors" name="radio" value="male">Male
+          <input type="radio" formControlName="radio" class="form-control" [ngClass]="{'is-invalid':submitted} && n['radio'].errors" name="radio" value="female">Female
+
+          <div *ngIf="submitted && n['radio'].errors" class="invalid-feedback">
+            <div *ngIf="n['radio'].errors?.['required']">
+              Gender is required
+
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="submit">
+          <button type="button" [disabled]="loading" (click)="onSubmit()">Submit</button>
+</div>
+        </div>
+      </form>
+
+    </div>
+
+    <router-outlet></router-outlet>
+  </body>
+</html>
